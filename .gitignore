@@ -4,9 +4,12 @@
 *.jar
 *.war
 *.ear
+<<<<<<< HEAD
 
 .idea/*
 target
 .DS_Store
 out/*
 *.iml
+=======
+>>>>>>> ea47ef0527146c2aa48ed58e11c76a71eadbd581
