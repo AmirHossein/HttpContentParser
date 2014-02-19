@@ -25,7 +25,7 @@ public class HttpRequestParser {
         if (this.validate()) {
             this.parseIdentifier(this.identifiers);
             this.parseHeaderFields(this.headerFields);
-            this.parseBody(push(this.sections));
+            this.parseBody(shift_array(this.sections));
         }
     }
 
@@ -42,7 +42,7 @@ public class HttpRequestParser {
                         if (identifiers.length == 3) {
                             this.sections = sections;
                             this.identifiers = identifiers;
-                            this.headerFields = push(headers);
+                            this.headerFields = shift_array(headers);
                             return true;
                         }
                     }
@@ -66,7 +66,7 @@ public class HttpRequestParser {
             String[] field = line.split(":");
             String key = field[0].trim();
 
-            field = push(field);
+            field = shift_array(field);
             StringBuilder fieldValue = new StringBuilder();
             for (String aField : field) {
                 fieldValue.append(" ").append(aField);
@@ -117,7 +117,7 @@ public class HttpRequestParser {
         return body;
     }
 
-    private static String[] push(String[] array) {
+    private static String[] shift_array(String[] array) {
         if (array.length > 0) {
             String[] newArray = new String[array.length - 1];
             for (int i = 1; i < array.length; i += 1) {
